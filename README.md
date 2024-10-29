@@ -13,48 +13,55 @@ composer require vdh-solar/api-sdk
 
 ## Usage
 
-You should start by creating an instance of the VDH Solar `ApiClient`. This is the bases of all the subsequent request.
+You should start by creating an instance of the VDH Solar `ApiClient`. This is the bases of all the subsequent request. When initialzing the ApiClient you need to pass in a token. Please check reference the [API documentation](https://docs.vdh-solar.nl/authentication) to check out where you can retreive this key.
 
 ```php
-$vdhApi = new \VdhSolar\ApiClient('eyJ...');
+$vdhSolarClient = new \VdhSolar\ApiClient('eyJ...');
 ```
+
+You can easily test if you are authenticated with the api by calling the `ping` endpoint of the API. It this method returns `pong`, it means you are successfully autheticated with the API.
+
+```php
+$vdhSolarClient->ping();
+```
+
 ## Products
 
 ### List products
 ```php
-$vdhApi->products->list();
+$vdhSolarClient->products->list();
 ```
 
 ### Filter products by name
 ```php
-$vdhApi->products->list(
+$vdhSolarClient->products->list(
     name: 'Solar',
 );
 ```
 
 ### Filter products by ID
 ```php
-$vdhApi->products->list(
+$vdhSolarClient->products->list(
     id: 1,
 );
 ```
 
 ### Filter products by updated date
 ```php
-$vdhApi->products->list(
+$vdhSolarClient->products->list(
     updated_after: Carbon::yesterday()->startOfDay(),
 );
 ```
 
 ```php
-$vdhApi->products->list(
+$vdhSolarClient->products->list(
     updated_before: Carbon::yesterday()->startOfDay(),
 );
 ```
 
 ### List a single product
 ```php
-$vdhApi->products->get(12345);
+$vdhSolarClient->products->get(12345);
 ```
 
 ## Paginated data
@@ -63,7 +70,7 @@ You can get all the paginated results by adding a paginate callback to the list 
 This paginate functions works on all resources that support the list method. Eq. this is available for products, brands, categories, stock and orders.
 
 ```php
-$vdhApi->products->list(
+$vdhSolarClient->products->list(
     updated_after: Carbon::yesterday()->startOfYear(),
     paginate: function (array $results): void {
         foreach ($results as $product) {
