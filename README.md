@@ -91,7 +91,7 @@ composer test
 
 ## Security
 
-If you discover any security related issues, please email stef@marshmallow.dev instead of using the issue tracker.
+If you discover any security related issues, please email developers@vdh-solar.nl instead of using the issue tracker.
 
 ## Credits
 
